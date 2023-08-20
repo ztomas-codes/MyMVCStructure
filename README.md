@@ -11,31 +11,6 @@ docker-compose up
 ```
 
 ## Tree
-## Installation
-
-Use the github clone 
-
-```bash
-git clone https://github.com/ztomas-codes/MyMVCStructure.git
-docker-compose build
-docker-compose up
-```
-
-## Config 
-config is in src/core/config.php
-```php
-return [
-    "database" =>
-    [
-        "host" => "db",
-        "user" => "thomas",
-        "pwd" => "password123",
-        "dbName" => "mydb",
-    ],
-];
-```
-
-## Tree
 ```bash
 ├── docker-compose.yml
 ├── README.md
@@ -67,6 +42,19 @@ return [
     │       │   └── header.php
     │       └── View.php
     └── Dockerfile
+```
+## Config 
+config is in src/core/config.php
+```php
+return [
+    "database" =>
+    [
+        "host" => "db",
+        "user" => "thomas",
+        "pwd" => "password123",
+        "dbName" => "mydb",
+    ],
+];
 ```
 
 ## Usage
