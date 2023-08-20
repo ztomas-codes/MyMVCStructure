@@ -129,14 +129,7 @@ Model is added in
     │   ├── Core.php
     │   ├── Database
     │   ├── index.php
-    │   ├── Models# My MVC Framework
-Foobar is a Python library for dealing with word pluralization.
-
-    public $tableName = "users";
-    public $id;
-    public $username;
-    public $password;
-}
+    │   ├── Models
 ```
 
 But you need to create tables manually !! (Automatic creating not implemented yet)
