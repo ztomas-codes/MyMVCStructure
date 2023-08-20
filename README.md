@@ -130,6 +130,8 @@ Model is added in
     │   ├── Database
     │   ├── index.php
     │   ├── Models
+    │   │   ├── Model.php
+    │   │   └── User.php    <== USER MODEL
 ```
 
 But you need to create tables manually !! (Automatic creating not implemented yet)
