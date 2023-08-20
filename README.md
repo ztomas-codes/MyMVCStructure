@@ -63,7 +63,7 @@ return [
 ```bash
 http://localhost/{Controller}/{MethodInController}/{Params spliced by /}
 ```
-Then it will fetch view by Controller name and Method name for example when i have url like this: 
+It will fetch view by Controller name and Method name for example when i have url like this: 
 
 ```bash
 http://localhost/home/whereis/LordMefloun
