@@ -3,8 +3,8 @@ return [
     "database" =>
     [
         "host" => "db",
-        "user" => "tomko",
-        "pwd" => "hesilko123",
-        "dbName" => "blog_db",
+        "user" => "thomas",
+        "pwd" => "password123",
+        "dbName" => "mydb",
     ],
 ];

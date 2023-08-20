@@ -12,9 +12,9 @@ class HomeController extends Controller
         $view->render();
     }
 
-    public function poradi($params)
+    public function whereis($params)
     {
-        $view = new View("poradi", $this);
+        $view = new View("where", $this);
         $view->setData("user", $this->getDb()->getModelByParam(["username" => $params[0]], "Models\\User"));
         $view->render();
     }

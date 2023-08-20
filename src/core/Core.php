@@ -17,7 +17,6 @@ class Core
         else $controllerName = "Controllers\\HomeController";
         $action = $url[2] ?? "index";
 
-        //if url is longer than 3, then it contains parameters so we need to extract them and pass them to the controller separately
         if (count($url) > 3)
         {
             $params = array_slice($url, 3);

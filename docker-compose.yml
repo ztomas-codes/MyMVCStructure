@@ -11,15 +11,15 @@ services:
             - db
     db:
         container_name: db
-        image: mysql
+        image: mysql:8.1.0
         restart: always
         environment:
-            MYSQL_ROOT_PASSWORD: hesilko
-            MYSQL_DATABASE: blog_db
-            MYSQL_USER: tomko
-            MYSQL_PASSWORD: hesilko123
+            MYSQL_ROOT_PASSWORD: woodstock
+            MYSQL_DATABASE: mydb
+            MYSQL_USER: thomas
+            MYSQL_PASSWORD: password123
         ports:
-            - "9906:3306"
+            - "3306:3306"
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
         container_name: phpmyadmin
