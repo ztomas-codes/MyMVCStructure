@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+    web:
+        container_name: web
+        build: ./src
+        volumes:
+            - ./src:/var/www/html
+        ports:
+            - "80:80"
+        depends_on:
+            - db
+    db:
+        container_name: db
+        image: mysql
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: hesilko
+            MYSQL_DATABASE: blog_db
+            MYSQL_USER: tomko
+            MYSQL_PASSWORD: hesilko123
+        ports:
+            - "9906:3306"
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: phpmyadmin
+        links:
+            - db
+        environment:
+            PMA_HOST: db
+            PMA_PORT: 3306
+            PMA_ARBITRARY: 1
+        restart: always
+        ports:
+            - 8081:80
+        depends_on:
+            - db
