@@ -1,5 +1,4 @@
 # My MVC Framework
-Foobar is a Python library for dealing with word pluralization.
 
 ## Installation
 
@@ -12,9 +11,6 @@ docker-compose up
 ```
 
 ## Tree
-# My MVC Framework
-Foobar is a Python library for dealing with word pluralization.
-
 ## Installation
 
 Use the github clone 
@@ -145,15 +141,9 @@ Model is added in
     │   ├── Core.php
     │   ├── Database
     │   ├── index.php
-    │   ├── Models
-    │   │   ├── Model.php
-    │   │   └── User.php        <== User Model
-```
-User.php
-```php
-namespace Models;
-class User extends Model
-{
+    │   ├── Models# My MVC Framework
+Foobar is a Python library for dealing with word pluralization.
+
     public $tableName = "users";
     public $id;
     public $username;
