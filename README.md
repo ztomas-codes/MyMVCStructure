@@ -133,6 +133,16 @@ Model is added in
     │   │   ├── Model.php
     │   │   └── User.php    <== USER MODEL
 ```
+```php
+namespace Models;
+class User extends Model
+{
+    public $tableName = "users";
+    public $id;
+    public $username;
+    public $password;
+}
+```
 
 But you need to create tables manually !! (Automatic creating not implemented yet)
 to add Model into table in database :
