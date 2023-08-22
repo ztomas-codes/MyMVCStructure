@@ -15,12 +15,21 @@ class View
         $this->data = [];
     }
 
-    public function setData($name, $value)
+    /**
+     * @param $name
+     * @param $value
+     * @return void
+     */
+    public function setData($name, $value) : void
     {
         $this->data[$name] = $value;
     }
 
-    public function render($template = true)
+    /**
+     * @param $template
+     * @return void
+     */
+    public function render($template = true) : void
     {
         if ($template) include "./Views/Template/header.php";
         extract($this->data);

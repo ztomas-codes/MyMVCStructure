@@ -1,6 +1,7 @@
 <?php
 
 namespace Database;
+use Models\Model;
 use PDO;
 use PDOException;
 
@@ -31,7 +32,11 @@ class Database
         }
     }
 
-    public function save($model)
+    /**
+     * @param Model $model
+     * @return void
+     */
+    public function addNewModel(Model $model) : void
     {
         $tableName = $model->getTableName();
         $fields = $model->getFieldsAsSQL();
@@ -40,7 +45,25 @@ class Database
         $this->connection->exec($sql);
     }
 
-    public function getModelById($id, $classOfModel)
+    /**
+     * @param Model $model
+     * @return void
+     */
+    public function saveModel(Model $model) : void
+    {
+        $id = $model->id;
+        $tableName = $model->getTableName();
+        $fields = $model->getFieldsAsSQL();
+        $values = $model->getValuesAsSQL();
+        $sql = "UPDATE $tableName SET ($fields) VALUES ($values) WHERE id = $id";
+    }
+
+    /**
+     * @param $id
+     * @param $classOfModel
+     * @return Model
+     */
+    public function getModelById($id, $classOfModel) : Model
     {
         $tableName = (new $classOfModel())->getTableName();
         $sql = "SELECT * FROM $tableName WHERE id = $id";
@@ -53,9 +76,13 @@ class Database
         return $model;
     }
 
-    public function getModelByParam($paramValue, $classOfModel)
+    /**
+     * @param $paramValue
+     * @param $classOfModel
+     * @return Model
+     */
+    public function getModelByParam($paramValue, $classOfModel) : Model
     {
-        //paramValue is an array of key value pairs
         $tableName = (new $classOfModel())->getTableName();
         $sql = "SELECT * FROM $tableName WHERE ";
         foreach ($paramValue as $key => $value) {

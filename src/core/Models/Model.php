@@ -5,6 +5,9 @@ class Model
 
     protected $tableName;
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
 
@@ -21,7 +24,10 @@ class Model
     }
 
 
-    public function getValuesAsSQL()
+    /**
+     * @return string
+     */
+    public function getValuesAsSQL() : string
     {
         $string = "";
         foreach ($this as $key => $value) {
@@ -35,7 +41,10 @@ class Model
         return $string;
     }
 
-    public function getFieldsAsSQL()
+    /**
+     * @return string
+     */
+    public function getFieldsAsSQL() : string
     {
         $string = "";
         foreach ($this as $key => $value) {
@@ -49,7 +58,10 @@ class Model
         return $string;
     }
 
-    public function getTableName()
+    /**
+     * @return string
+     */
+    public function getTableName() : string
     {
         return $this->tableName;
     }
