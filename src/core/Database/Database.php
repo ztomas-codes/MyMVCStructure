@@ -7,10 +7,27 @@ use PDOException;
 
 class Database
 {
+    /**
+     * @var string
+     */
     private $host;
+
+    /**
+     * @var string
+     */
     private $user;
+    /**
+     * @var string
+     */
     private $password;
+    /**
+     * @var PDO
+     */
     private $connection;
+
+    /**
+     * @var string
+     */
     private $dbName;
 
     public function __construct()

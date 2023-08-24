@@ -1,4 +1,6 @@
 <div>
-    <h1>Home</h1>
-    <p>Hello ! first user is : <?php echo $user->username?></p>
+    <h1>Domů</h1>
+    <pre>
+        <?php print_r($user); ?>
+    </pre>
 </div>

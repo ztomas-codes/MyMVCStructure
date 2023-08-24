@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 
 define("PATH", "http://localhost/");
 

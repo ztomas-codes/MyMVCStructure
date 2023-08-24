@@ -1,4 +1,6 @@
 <?php
+
+namespace FormFactory;
 class Input
 {
     public const INPUT_TYPE_TEXT = "text";
@@ -14,10 +16,35 @@ class Input
     public const INPUT_TYPE_COLOR = "color";
     public const INPUT_TYPE_RANGE = "range";
     public const INPUT_TYPE_RESET = "reset";
-    public const INPUT_TYPE_BUTTON = "button";
 
     private $type;
     private $name;
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    private $value;
 
     public function __construct($type, $name)
     {
@@ -30,6 +57,12 @@ class Input
      */
     public function __toString() : string
     {
-        return "<input type='$this->type' name='$this->name'>";
+        if ($this->type == self::INPUT_TYPE_SUBMIT) return "<input type='$this->type'>";
+        else return "<input type='$this->type' name='$this->name'>";
+    }
+
+    public function setValue($value)
+    {
+        $this->value = $value;
     }
 }

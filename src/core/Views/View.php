@@ -2,10 +2,24 @@
 
 namespace Views;
 
+use Controllers\Controller;
+
 class View
 {
+
+    /**
+     * @var 
+     */
     private $name;
-    private $controller;
+
+    /**
+     * @var Controller|mixed|null
+     */
+    private Controller $controller;
+
+    /**
+     * @var array
+     */
     private $data;
 
     public function __construct($name, $controller = null)

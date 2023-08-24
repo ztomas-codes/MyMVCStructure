@@ -1,35 +1,148 @@
 <?php
+
+namespace FormFactory;
+use Models\Model;
+
 class Form
 {
-    public const METHOD_POST = "post";
-    public const METHOD_GET = "get";
 
-    public const INPUT_TYPE_TEXT = "text";
-    public const INPUT_TYPE_PASSWORD = "password";
-    public const INPUT_TYPE_SUBMIT = "submit";
-    public const INPUT_TYPE_EMAIL = "email";
-    public const INPUT_TYPE_NUMBER = "number";
-    public const INPUT_TYPE_DATE = "date";
-    public const INPUT_TYPE_HIDDEN = "hidden";
-    public const INPUT_TYPE_CHECKBOX = "checkbox";
-    public const INPUT_TYPE_RADIO = "radio";
-    public const INPUT_TYPE_FILE = "file";
-    public const INPUT_TYPE_COLOR = "color";
-    public const INPUT_TYPE_RANGE = "range";
-    public const INPUT_TYPE_RESET = "reset";
-    public const INPUT_TYPE_BUTTON = "button";
 
+    /**
+     * @var null | string
+     */
+    private $classOfModel = null;
+    /**
+     * @var array
+     */
+    private $fields = [];
+
+    /**
+     * @var string
+     */
+    private $method;
+
+    public function getMethod(): string
+    {
+        return $this->method;
+    }
+
+    public function setMethod(string $method): void
+    {
+        $this->method = $method;
+    }
+
+    public function getAction(): string
+    {
+        return $this->action;
+    }
+
+    public function setAction(string $action): void
+    {
+        $this->action = $action;
+    }
+
+    /**
+     * @var string
+     */
+    private $action;
 
     /**
      * @return string
      */
     public function __toString() : string
     {
-        $html = "<form>";
-        foreach ($this->fields as $field) {
-            $html .= $field;
+        $html = "<form method='$this->method' action='$this->action'>";
+        foreach ($this->fields as $input) {
+            if ($input->getType() == Input::INPUT_TYPE_SUBMIT) {
+                $html .= $input;
+            }
+            else
+            {
+                $html .= "<br>". $input;
+            }
         }
         $html .= "</form>";
         return $html;
     }
+
+    public function addField(Input $field)
+    {
+        $this->fields[] = $field;
+    }
+
+    /**
+     * @return array
+     */
+    public function getFields()
+    {
+        $fields = array_filter($this->fields, function($field) {
+            return $field->getType() != Input::INPUT_TYPE_SUBMIT;
+        });
+        return $fields;
+    }
+
+
+    /**
+     * @return array|Model
+     */
+    public function validate()
+    {
+
+        $validatedValues = [];
+        $modelInstance = null;
+        if ($this->classOfModel != null) {
+            $modelInstance = new $this->classOfModel();
+        }
+
+
+        $form = $this;
+        $fields = $form->getFields();
+        foreach ($fields as $field) {
+
+            $postRequestFieldValue = $_POST[$field->getName()];
+
+            //validate for XSS and SQL injection
+            $postRequestFieldValue = htmlspecialchars($postRequestFieldValue);
+            $postRequestFieldValue = stripslashes($postRequestFieldValue);
+            $postRequestFieldValue = trim($postRequestFieldValue);
+
+            if ($postRequestFieldValue == null) {
+                return [];
+            }
+            else if ($field->getType() == Input::INPUT_TYPE_EMAIL) {
+                if (!filter_var($postRequestFieldValue, FILTER_VALIDATE_EMAIL)) {
+                    return [];
+                }
+            }
+            else
+            {
+                //add to validated values
+                if ($modelInstance != null) {
+                    $fieldName = $field->getName();
+                    $modelInstance->$fieldName = $postRequestFieldValue;
+                }
+                else $validatedValues[$field->getName()] = $postRequestFieldValue;
+
+            }
+        }
+        return $modelInstance != null ? $modelInstance : $validatedValues;
+    }
+
+
+    /**
+     * @return bool
+     */
+    public function isSubmitted() : bool
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            return true;
+        }
+        return false;
+    }
+
+    public function setClassOfModel($classOfModel)
+    {
+        $this->classOfModel = $classOfModel;
+    }
+
 }

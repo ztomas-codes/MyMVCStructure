@@ -3,6 +3,9 @@ namespace Models;
 class Model
 {
 
+    /**
+     * @var string
+     */
     protected $tableName;
 
     /**

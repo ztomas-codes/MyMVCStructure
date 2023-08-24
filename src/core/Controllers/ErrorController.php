@@ -5,7 +5,11 @@ use Views\View;
 
 class ErrorController extends Controller
 {
-    public function index($params)
+    /**
+     * @param $params
+     * @return void
+     */
+    public function index($params) : void
     {
         $view = new View("index", $this);
         $view->setData("error", $params);

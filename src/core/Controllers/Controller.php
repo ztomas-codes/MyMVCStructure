@@ -1,12 +1,17 @@
 <?php
 namespace Controllers;
 
+use Database\Database;
+
 class Controller
 {
+    /**
+     * @var mixed
+     */
     private $db;
 
     /**
-     * @return mixed
+     * @return Database
      */
     public function getDb()
     {
@@ -19,6 +24,11 @@ class Controller
     public function setDb($db): void
     {
         $this->db = $db;
+    }
+
+    public function redirect($url) : void
+    {
+        header("Location: $url");
     }
 
 }
