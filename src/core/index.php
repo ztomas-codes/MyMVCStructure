@@ -1,7 +1,9 @@
 <?php
 session_start();
 
-define("PATH", "http://localhost/");
+
+//it will look like http://localhost:8080 but dynamic
+define("FULL_PATH", "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
 
 function getConfig()
 {
@@ -13,9 +15,18 @@ spl_autoload_register(function ($class) {
     require './' . str_replace('\\', '/', $class) . '.php';
 });
 
-function controllerExists($class)
+function controllerExists($class) : bool
 {
     return file_exists('./' . str_replace('\\', '/', $class) . '.php');
+}
+
+function makeControllerUrl($controllerName = "home", $action = "index") : string
+{
+    return FULL_PATH."$controllerName/$action";
+}
+
+function getAssets(){
+    return FULL_PATH."/assets";
 }
 
 new Core();

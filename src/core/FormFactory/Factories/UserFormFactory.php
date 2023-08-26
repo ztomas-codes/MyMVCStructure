@@ -3,7 +3,7 @@ namespace FormFactory\Factories;
 use FormFactory\FormFactory;
 use FormFactory\Input;
 
-class UserRegisterFormFactory extends FormFactory
+class UserFormFactory extends FormFactory
 {
     public function __construct()
     {
@@ -11,7 +11,9 @@ class UserRegisterFormFactory extends FormFactory
             ->createFromModel(new \Models\User())
             ->setMethod(FormFactory::METHOD_POST)
             ->addSubmit()
-            ->setAction("/register");
+            ->setLabelByName("username", "Username")
+            ->setLabelByName("password", "Password")
+            ->setLabelByName("email", "Email");
         return $form;
     }
 }

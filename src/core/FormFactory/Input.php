@@ -17,6 +17,7 @@ class Input
     public const INPUT_TYPE_RANGE = "range";
     public const INPUT_TYPE_RESET = "reset";
 
+    private $label = null;
     private $type;
     private $name;
 
@@ -64,5 +65,15 @@ class Input
     public function setValue($value)
     {
         $this->value = $value;
+    }
+
+    public function setLabel($label)
+    {
+        $this->label = "<label>".$label."</label>";
+    }
+
+    public function getLabel() : ?string
+    {
+        return $this->label;
     }
 }

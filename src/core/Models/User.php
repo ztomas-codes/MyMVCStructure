@@ -22,7 +22,7 @@ class User extends Model
     public $password;
 
     /**
-     * @var string
+     * @var
      */
     public $email;
 }

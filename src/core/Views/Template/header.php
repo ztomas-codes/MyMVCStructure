@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?php echo PATH?>assets/style.css">
+    <link rel="stylesheet" href="<?php echo FULL_PATH?>assets/style.css">
     <title>Document</title>
 </head>
 <body>
     
-<p>Hlavička</p>

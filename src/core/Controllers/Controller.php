@@ -26,9 +26,9 @@ class Controller
         $this->db = $db;
     }
 
-    public function redirect($url) : void
+    public function redirect($controllerName = "home", $action = "index") : void
     {
-        header("Location: $url");
+        header("Location: ". makeControllerUrl($controllerName, $action));
     }
 
 }

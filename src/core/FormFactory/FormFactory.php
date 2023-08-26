@@ -9,7 +9,11 @@ class FormFactory
     public const METHOD_POST = "post";
     public const METHOD_GET = "get";
 
-    private $Form = null;
+
+    /**
+     * @var null | Form
+     */
+    private $form = null;
 
     /**
      * @return $this
@@ -17,7 +21,7 @@ class FormFactory
     public function create() : FormFactory
     {
         $form = new Form();
-        $this->Form = $form;
+        $this->form = $form;
         return $this;
     }
 
@@ -37,8 +41,8 @@ class FormFactory
             if (isset($value)) $field->setValue($value);
             $form->addField($field);
         }
-        $this->Form = $form;
-        $this->Form->setClassOfModel(get_class($model));
+        $this->form = $form;
+        $this->form->setClassOfModel(get_class($model));
         return $this;
     }
 
@@ -48,7 +52,7 @@ class FormFactory
      */
     public function setMethod($method) : FormFactory
     {
-        $this->Form->setMethod($method);
+        $this->form->setMethod($method);
         return $this;
     }
 
@@ -58,7 +62,7 @@ class FormFactory
      */
     public function setAction($action) : FormFactory
     {
-        $this->Form->setAction($action);
+        $this->form->setAction($action);
         return $this;
     }
 
@@ -71,14 +75,14 @@ class FormFactory
     {
         if ($inputType == null) $inputType = self::getInputTypeFromName($inputName);
         $input = new Input($inputType, $inputName);
-        $this->Form->addField($input);
+        $this->form->addField($input);
         return $this;
     }
 
     public function addSubmit() : FormFactory
     {
         $input = new Input(Input::INPUT_TYPE_SUBMIT, "");
-        $this->Form->addField($input);
+        $this->form->addField($input);
         return $this;
     }
 
@@ -87,7 +91,7 @@ class FormFactory
      */
     public function getForm() : Form
     {
-        return $this->Form;
+        return $this->form;
     }
 
 
@@ -137,4 +141,27 @@ class FormFactory
         return $inputType;
     }
 
+
+    /**
+     * @param $name
+     * @return Input|null
+     */
+    private function getInputByName($name) : ?Input
+    {
+        foreach ($this->form->getFields() as $field) {
+            if ($field->getName() == $name) {
+                return $field;
+            }
+        }
+        return null;
+    }
+
+    public function setLabelByName($name, $label) : FormFactory
+    {
+        $input = $this->getInputByName($name);
+        if ($input != null) {
+            $input->setLabel($label);
+        }
+        return $this;
+    }
 }

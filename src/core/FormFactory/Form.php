@@ -58,7 +58,10 @@ class Form
             }
             else
             {
-                $html .= "<br>". $input;
+                if ($input->getLabel() != null)
+                    $html .= "<br>".$input->getLabel(). $input;
+                else
+                    $html .= "<br>".$input;
             }
         }
         $html .= "</form>";
@@ -109,11 +112,12 @@ class Form
             if ($postRequestFieldValue == null) {
                 return [];
             }
-            else if ($field->getType() == Input::INPUT_TYPE_EMAIL) {
+            // TODO: add more validation
+            /*else if ($field->getType() == Input::INPUT_TYPE_EMAIL) {
                 if (!filter_var($postRequestFieldValue, FILTER_VALIDATE_EMAIL)) {
                     return [];
                 }
-            }
+            }*/
             else
             {
                 //add to validated values
@@ -144,5 +148,7 @@ class Form
     {
         $this->classOfModel = $classOfModel;
     }
+
+
 
 }

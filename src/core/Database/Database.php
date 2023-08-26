@@ -58,6 +58,7 @@ class Database
         $tableName = $model->getTableName();
         $fields = $model->getFieldsAsSQL();
         $values = $model->getValuesAsSQL();
+
         $sql = "INSERT INTO $tableName ($fields) VALUES ($values)";
         $this->connection->exec($sql);
     }
@@ -98,7 +99,7 @@ class Database
      * @param $classOfModel
      * @return Model
      */
-    public function getModelByParam($paramValue, $classOfModel) : Model
+    public function getModelByParam($paramValue, $classOfModel) : ?Model
     {
         $tableName = (new $classOfModel())->getTableName();
         $sql = "SELECT * FROM $tableName WHERE ";
@@ -108,6 +109,7 @@ class Database
         $sql = rtrim($sql, "AND ");
         $result = $this->connection->query($sql);
         $result = $result->fetch(PDO::FETCH_ASSOC);
+        if ($result == false) return null;
         $model = new $classOfModel();
         foreach ($result as $key => $value) {
             $model->$key = $value;
